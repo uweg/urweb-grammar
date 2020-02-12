@@ -5,10 +5,10 @@
 <dict>
   <key>fileTypes</key>
   <array> 
-    <string>mysample</string>
+    <string>ur</string>
    </array>
   <key>name</key>
-  <string>mysample</string>
+  <string>urweb</string>
   <key>patterns</key>
   <array> 
     <dict>
@@ -17,7 +17,7 @@
     </dict>
    </array>
   <key>scopeName</key>
-  <string>source.mysample</string>
+  <string>source.urweb</string>
   <key>uuid</key>
   <string></string>
   <key>repository</key>
@@ -28,23 +28,23 @@
       <array> 
         <dict>
           <key>match</key>
-          <string>(\b[a-z][a-z0-9]*)</string>
+          <string>((^|\s)(con|fun|and|let|in|end|val)($|\s))</string>
           <key>name</key>
-          <string>keyword.mysample</string>
+          <string>keyword.urweb</string>
         </dict>
         <dict>
           <key>include</key>
-          <string>#numeric</string>
+          <string>#multi_line_comment</string>
         </dict>
         <dict>
           <key>begin</key>
-          <string>(\{)</string>
+          <string>(\()</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>punctuation.mysample</string>
+              <string>punctuation.urweb</string>
             </dict>
           </dict>
           <key>patterns</key>
@@ -55,55 +55,54 @@
             </dict>
            </array>
           <key>end</key>
-          <string>(\})</string>
+          <string>(\))</string>
           <key>endCaptures</key>
           <dict>
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>punctuation.mysample</string>
+              <string>punctuation.urweb</string>
             </dict>
           </dict>
         </dict>
         <dict>
-          <key>match</key>
-          <string>(;)</string>
-          <key>name</key>
-          <string>punctuation.mysample</string>
-        </dict>
-        <dict>
           <key>begin</key>
-          <string>(\&quot;)</string>
+          <string>(\[)</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>punctuation.mysample</string>
+              <string>punctuation.urweb</string>
             </dict>
           </dict>
-          <key>contentName</key>
-          <string>text.mysample</string>
+          <key>patterns</key>
+          <array> 
+            <dict>
+              <key>include</key>
+              <string>#main__2</string>
+            </dict>
+           </array>
           <key>end</key>
-          <string>(\&quot;)</string>
+          <string>(\])</string>
           <key>endCaptures</key>
           <dict>
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>punctuation.mysample</string>
+              <string>punctuation.urweb</string>
             </dict>
           </dict>
         </dict>
         <dict>
           <key>begin</key>
-          <string>(\()</string>
+          <string>(\{)</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>punctuation.mysample</string>
+              <string>punctuation.urweb</string>
             </dict>
           </dict>
           <key>patterns</key>
@@ -114,31 +113,50 @@
             </dict>
            </array>
           <key>end</key>
-          <string>(\))</string>
+          <string>(\})</string>
           <key>endCaptures</key>
           <dict>
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>punctuation.mysample</string>
+              <string>punctuation.urweb</string>
             </dict>
           </dict>
         </dict>
         <dict>
-          <key>include</key>
-          <string>#multi_line_comment</string>
+          <key>begin</key>
+          <string>(&lt;[a-z]+)</string>
+          <key>beginCaptures</key>
+          <dict>
+            <key>1</key>
+            <dict>
+              <key>name</key>
+              <string>markup.urweb</string>
+            </dict>
+          </dict>
+          <key>patterns</key>
+          <array> 
+            <dict>
+              <key>include</key>
+              <string>#main__4</string>
+            </dict>
+           </array>
+          <key>end</key>
+          <string>(/?&gt;)</string>
+          <key>endCaptures</key>
+          <dict>
+            <key>1</key>
+            <dict>
+              <key>name</key>
+              <string>markup.urweb</string>
+            </dict>
+          </dict>
         </dict>
         <dict>
           <key>match</key>
-          <string>(//.*)</string>
+          <string>(&lt;/[a-z]+&gt;)</string>
           <key>name</key>
-          <string>comment.mysample</string>
-        </dict>
-        <dict>
-          <key>match</key>
-          <string>([^\s])</string>
-          <key>name</key>
-          <string>invalid.mysample</string>
+          <string>markup.urweb</string>
         </dict>
        </array>
     </dict>
@@ -156,6 +174,10 @@
     <dict>
       <key>patterns</key>
       <array> 
+        <dict>
+          <key>include</key>
+          <string>#main</string>
+        </dict>
        </array>
     </dict>
     <key>main__3</key>
@@ -164,13 +186,17 @@
       <array> 
         <dict>
           <key>include</key>
-          <string>#numeric</string>
+          <string>#main</string>
         </dict>
+       </array>
+    </dict>
+    <key>main__4</key>
+    <dict>
+      <key>patterns</key>
+      <array> 
         <dict>
-          <key>match</key>
-          <string>(,)</string>
-          <key>name</key>
-          <string>punctuation.mysample</string>
+          <key>include</key>
+          <string>#main</string>
         </dict>
        </array>
     </dict>
@@ -180,25 +206,25 @@
       <array> 
         <dict>
           <key>begin</key>
-          <string>(/\*)</string>
+          <string>(\(\*)</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>comment.mysample</string>
+              <string>comment.urweb</string>
             </dict>
           </dict>
           <key>contentName</key>
-          <string>comment.mysample</string>
+          <string>comment.urweb</string>
           <key>end</key>
-          <string>(\*/)</string>
+          <string>(\*\))</string>
           <key>endCaptures</key>
           <dict>
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>comment.mysample</string>
+              <string>comment.urweb</string>
             </dict>
           </dict>
         </dict>
@@ -208,18 +234,6 @@
     <dict>
       <key>patterns</key>
       <array> 
-       </array>
-    </dict>
-    <key>numeric</key>
-    <dict>
-      <key>patterns</key>
-      <array> 
-        <dict>
-          <key>match</key>
-          <string>(\b\d+)</string>
-          <key>name</key>
-          <string>constant.numeric.mysample</string>
-        </dict>
        </array>
     </dict>
   </dict>
