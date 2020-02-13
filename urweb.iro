@@ -30,6 +30,11 @@ styles [] {
       textmate_scope = markup
    }
    
+   .string : style {
+      color = red
+      textmate_scope = string
+   }
+   
    .illegal : style {
       color                 = white
       background_color      = red
@@ -75,6 +80,16 @@ contexts[] {
             styles []    = .punctuation;
          }
          : include "main" ;
+      }
+   
+      : inline_push {
+         regex          \= (\")
+         styles []       = .punctuation;
+         default_style = .string
+         : pop {  
+            regex       \= (\")
+            styles []    = .punctuation;
+         }
       }
       
       : inline_push {
